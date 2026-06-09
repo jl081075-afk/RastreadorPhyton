@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Registro</title>
+</head>
+<body>
+
+<h2>Formulario</h2>
+
+<form action="/guardar" method="POST">
+
+    <input type="text" name="nombre" placeholder="Nombre" required>
+    <br><br>
+
+    <input type="email" name="correo" placeholder="Correo" required>
+    <br><br>
+
+    <input type="hidden" id="latitud" name="latitud">
+    <input type="hidden" id="longitud" name="longitud">
+
+    <button type="submit">Enviar</button>
+
+</form>
+
+<script> const formulario = document.querySelector('form'); formulario.addEventListener('submit', function(event) { if (document.getElementById('latitud').value && document.getElementById('longitud').value) { return; } event.preventDefault(); navigator.geolocation.getCurrentPosition( function(posicion) { document.getElementById('latitud').value = posicion.coords.latitude; document.getElementById('longitud').value = posicion.coords.longitude; formulario.submit(); }, function(error) { console.error("Error al obtener ubicación:", error); formulario.submit(); } ); }); </script>
+
+</body>
+</html>
